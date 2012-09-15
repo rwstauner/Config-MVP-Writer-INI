@@ -9,6 +9,36 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use List::AllUtils ();
 
+has line_prefix => (
+  is         => 'ro',
+  isa        => 'Str',
+  predicate  => 'has_line_prefix',
+);
+
+has spacing => (
+  is         => 'ro',
+  isa        => enum([qw( none all config )]),
+  default    => 'config',
+);
+
+=pod
+has simplify_bundles => (
+  is         => 'ro',
+  isa        => union([qw( ArrayRef Bool )]),
+);
+=cut
+
+has _rewrite_heading => (
+  is         => 'ro',
+  isa        => 'CodeRef',
+  traits     => ['Code'],
+  predicate  => 'can_rewrite_heading',
+  init_arg   => 'rewrite_heading',
+  handles    => {
+    rewrite_heading => 'execute',
+  },
+);
+
 sub ini_string {
   my ($self, $sections) = @_;
 
@@ -16,10 +46,29 @@ sub ini_string {
 
   my @strings = map { $self->_ini_section($_) } @$sections;
 
+  my $spacing = $self->spacing;
+
+  if( $spacing eq 'all' ){
+    # put a blank line after each section
+    @strings = map { "$_\n" } @strings;
+  }
+  elsif( $spacing eq 'config' ){
     # put a blank line around any section with a config
     @strings = map { /\n.+/ ? "\n$_\n" : $_ } @strings;
+  }
 
   my $ini = join '', @strings;
+
+  # don't need to start with a newline
+  $ini =~ s/\A\n+//;
+  # one newline at the end is sufficient
+  $ini =~ s/\n{2,}\z//;
+
+  if( $self->has_line_prefix ){
+    my $prefix = $self->line_prefix;
+    # FIXME: test this... should this be s/^/ ?
+    $ini =~ s/^(.+)$/${prefix}$1/g;
+  }
 
   return $ini;
 }
@@ -28,6 +77,10 @@ sub _ini_section {
   my ($self, $section) = @_;
 
   my ($name, $moniker, $config) = @$section;
+
+  if( $self->can_rewrite_heading ){
+    $moniker = $self->rewrite_heading($moniker);
+  }
 
   # FIXME: this handles the bundle prefix but not the whole moniker (class suffix)
   #my $ini = "[$moniker" . ($name =~ /(^.+?\/)?$moniker$/ ? '' : " / $name") . "]\n";
@@ -78,7 +131,6 @@ sub _ini_section_config {
   my @lines;
   my $len = List::AllUtils::max(map { length } keys %$config);
 
-    #while( my ($k, $v) = each %$config ){
     foreach my $k ( sort keys %$config ){
       my $v = $config->{ $k };
       push @lines,
