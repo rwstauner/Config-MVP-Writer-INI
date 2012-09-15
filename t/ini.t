@@ -25,9 +25,8 @@ has expected_ini => (
 test ini_format => sub {
   my ($self) = @_;
 
-  #my $writer = Config::MVP::Writer::INI->new($self->args);
-  #my $ini = $writer->write_string($self->sections);
-  my $string = Config::MVP::Writer::INI->string($self->sections);
+  my $writer = Config::MVP::Writer::INI->new($self->args);
+  my $string = $writer->ini_string($self->sections);
 
   is $string, $self->expected_ini, 'ini string formatted as expected';
 };
