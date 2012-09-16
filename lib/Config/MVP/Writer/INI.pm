@@ -9,12 +9,6 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use List::AllUtils ();
 
-has line_prefix => (
-  is         => 'ro',
-  isa        => 'Str',
-  predicate  => 'has_line_prefix',
-);
-
 has spacing => (
   is         => 'ro',
   isa        => enum([qw( none all config )]),
@@ -63,12 +57,6 @@ sub ini_string {
   $ini =~ s/\A\n+//;
   # one newline at the end is sufficient
   $ini =~ s/\n{2,}\z//;
-
-  if( $self->has_line_prefix ){
-    my $prefix = $self->line_prefix;
-    # FIXME: test this... should this be s/^/ ?
-    $ini =~ s/^(.+)$/${prefix}$1/g;
-  }
 
   return $ini;
 }
