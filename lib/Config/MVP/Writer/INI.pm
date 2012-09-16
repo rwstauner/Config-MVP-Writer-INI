@@ -154,8 +154,34 @@ no Moose::Util::TypeConstraints;
 __PACKAGE__->meta->make_immutable;
 1;
 
+=for test_synopsis
+my @sections;
+
 =head1 SYNOPSIS
 
+  my $ini = Config::MVP::Writer::INI->new->ini_string(\@sections);
+
 =head1 DESCRIPTION
+
+This class takes a collection of L<Config::MVP> style data structures
+and writes them to a string in INI format.
+
+=method ini_string
+
+This takes an array ref of array refs,
+each one being a C<Config::MVP> style section specification:
+
+  [
+    [ $name, $class_suffix, \%config ],
+  ]
+
+and returns a string.
+
+=for :stopwords TODO
+
+=head1 TODO
+
+=for :list
+* Documentation
 
 =cut
