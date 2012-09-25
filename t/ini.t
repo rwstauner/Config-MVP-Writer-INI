@@ -35,22 +35,24 @@ test ini_format => sub {
 run_me({
   sections => [
     # name, class-suffix, config
-    [Moniker => Name => {}],
+    [Name => Moniker => {}],
     [Ducky => Rubber => {
       feathers => 'yellow',
       orange => ['feet', 'beak'],
     }],
     [Pizza => Pizza => ],
+    [Donkey => Donuts => ],
   ],
   expected_ini => <<INI,
-[Name / Moniker]
+[Moniker / Name]
 
 [Rubber / Ducky]
 feathers = yellow
 orange   = feet
 orange   = beak
 
-[Pizza / Pizza]
+[Pizza]
+[Donuts / Donkey]
 INI
 });
 
