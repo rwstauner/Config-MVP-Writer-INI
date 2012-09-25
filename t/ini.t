@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Test::More 0.96;
+use Test::Differences;
 use Test::Routine;
 use Test::Routine::Util;
 
@@ -28,7 +29,7 @@ test ini_format => sub {
   my $writer = Config::MVP::Writer::INI->new($self->args);
   my $string = $writer->ini_string($self->sections);
 
-  is $string, $self->expected_ini, 'ini string formatted as expected';
+  eq_or_diff $string, $self->expected_ini, 'ini string formatted as expected';
 };
 
 run_me({
