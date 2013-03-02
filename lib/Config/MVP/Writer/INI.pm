@@ -15,7 +15,7 @@ has spacing => (
   default    => 'config',
 );
 
-=pod
+=for comment
 has simplify_bundles => (
   is         => 'ro',
   isa        => union([qw( ArrayRef Bool )]),
@@ -159,7 +159,7 @@ This takes an array ref of array refs,
 each one being a C<Config::MVP> style section specification:
 
   [
-    [ $name, $class_suffix, \%config ],
+    [ $name, $package, \%config ],
   ]
 
 and returns a string.
@@ -170,5 +170,6 @@ and returns a string.
 
 =for :list
 * Documentation
+* A lot more tests
 
 =cut
