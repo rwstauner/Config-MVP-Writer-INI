@@ -34,8 +34,8 @@ test ini_format => sub {
 
 run_me({
   sections => [
-    # name, class-suffix, config
-    [Name => Moniker => {}],
+    # name, package, payload
+    [Name => Package => {}],
     [Ducky => Rubber => {
       feathers => 'yellow',
       orange => ['feet', 'beak'],
@@ -44,7 +44,7 @@ run_me({
     [Donkey => Donuts => ],
   ],
   expected_ini => <<INI,
-[Moniker / Name]
+[Package / Name]
 
 [Rubber / Ducky]
 feathers = yellow

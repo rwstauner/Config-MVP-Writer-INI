@@ -22,14 +22,14 @@ has simplify_bundles => (
 );
 =cut
 
-has _rewrite_heading => (
+has _rewrite_package => (
   is         => 'ro',
   isa        => 'CodeRef',
   traits     => ['Code'],
-  predicate  => 'can_rewrite_heading',
-  init_arg   => 'rewrite_heading',
+  init_arg   => 'rewrite_package',
+  predicate  => 'can_rewrite_package',
   handles    => {
-    rewrite_heading => 'execute',
+    rewrite_package => 'execute',
   },
 );
 
@@ -64,24 +64,24 @@ sub ini_string {
 sub _ini_section {
   my ($self, $section) = @_;
 
-  my ($name, $moniker, $config) = @$section;
+  my ($name, $package, $config) = @$section;
 
-  if( $self->can_rewrite_heading ){
-    $moniker = $self->rewrite_heading($moniker);
+  if( $self->can_rewrite_package ){
+    $package = $self->rewrite_package($package);
   }
 
   # FIXME: this handles the bundle prefix but not the whole moniker (class suffix)
-  my $ini = "[$moniker" . ($name =~ /(^.+?\/)?$moniker$/ ? '' : " / $name") . "]\n";
+  my $ini = "[$package" . ($name =~ /(^.+?\/)?$package$/ ? '' : " / $name") . "]\n";
 
   $ini .= $self->_ini_section_config($config);
 
   return $ini;
 }
 
-    # TODO: rewrite_heading:
+    # TODO: rewrite_package
     # reverse RewritePrefix
-    #$moniker =~ s/Dist::Zilla::(Plugin(Bundle)?)::/$2 ? '@' : ''/e
-      #or $moniker = "=$moniker";
+    #$package =~ s/Dist::Zilla::(Plugin(Bundle)?)::/$2 ? '@' : ''/e
+      #or $package = "=$package";
 
 sub _simplify_bundles {
   my ($self, @sections) = @_;
