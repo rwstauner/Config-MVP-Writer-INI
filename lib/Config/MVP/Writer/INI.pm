@@ -153,6 +153,11 @@ my @sections;
 This class takes a collection of L<Config::MVP> style data structures
 and writes them to a string in INI format.
 
+=head1 WARNING
+
+This code is very much in an alpha state and the API is likely to change.
+As always, suggestions, bug reports, patches, and pull requests are welcome.
+
 =method ini_string
 
 This takes an array ref of array refs,
