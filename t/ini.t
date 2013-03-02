@@ -46,6 +46,7 @@ run_me({
     [Pizza => 'Mod::Pizza' => ],
     [Donkey => 'Mod::Donuts' => ],
     [AllTheSame => ],
+    'EvenMore::TheSame' =>
   ],
   expected_ini => <<INI,
 [Package / Name]
@@ -58,6 +59,7 @@ orange   = beak
 [Pizza]
 [Donuts / Donkey]
 [AllTheSame]
+[EvenMore::TheSame]
 INI
 });
 

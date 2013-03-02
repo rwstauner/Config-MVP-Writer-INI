@@ -64,6 +64,9 @@ sub ini_string {
 sub _ini_section {
   my ($self, $section) = @_;
 
+  $section = [ $section ]
+    unless ref($section) eq 'ARRAY';
+
   my ($name, $package, $config) = @$section;
   $package ||= $name;
 
