@@ -43,7 +43,7 @@ run_me({
       feathers => 'yellow',
       orange => ['feet', 'beak'],
     }],
-    [Pizza => Pizza => ],
+    [Pizza => 'Mod::Pizza' => ],
     [Donkey => 'Mod::Donuts' => ],
   ],
   expected_ini => <<INI,
