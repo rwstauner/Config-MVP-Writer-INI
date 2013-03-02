@@ -47,6 +47,7 @@ run_me({
     [Donkey => 'Mod::Donuts' => ],
     [AllTheSame => ],
     'EvenMore::TheSame' =>
+    'Mod::NoArray' =>
   ],
   expected_ini => <<INI,
 [Package / Name]
@@ -60,6 +61,7 @@ orange   = beak
 [Donuts / Donkey]
 [AllTheSame]
 [EvenMore::TheSame]
+[NoArray / Mod::NoArray]
 INI
 });
 
