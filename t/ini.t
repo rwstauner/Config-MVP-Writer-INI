@@ -33,15 +33,18 @@ test ini_format => sub {
 };
 
 run_me({
+  args => {
+    rewrite_package => sub { $_[0] =~ /Mod::(.+)/ ? $1 : $_[0] },
+  },
   sections => [
     # name, package, payload
-    [Name => Package => {}],
+    [Name => 'Mod::Package' => {}],
     [Ducky => Rubber => {
       feathers => 'yellow',
       orange => ['feet', 'beak'],
     }],
     [Pizza => Pizza => ],
-    [Donkey => Donuts => ],
+    [Donkey => 'Mod::Donuts' => ],
   ],
   expected_ini => <<INI,
 [Package / Name]
