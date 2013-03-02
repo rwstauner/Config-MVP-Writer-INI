@@ -65,6 +65,7 @@ sub _ini_section {
   my ($self, $section) = @_;
 
   my ($name, $package, $config) = @$section;
+  $package ||= $name;
 
   if( $self->can_rewrite_package ){
     $package = $self->rewrite_package($package);
