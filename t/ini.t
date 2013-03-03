@@ -1,36 +1,10 @@
 use strict;
 use warnings;
 use Test::More 0.96;
-use Test::Differences;
+use lib 't/lib';
 use Test::Routine;
 use Test::Routine::Util;
-
-use Config::MVP::Writer::INI ();
-
-has args => (
-  is          => 'ro',
-  isa         => 'HashRef',
-  default     => sub { +{} },
-);
-
-has sections => (
-  is          => 'ro',
-  isa         => 'ArrayRef',
-);
-
-has expected_ini => (
-  is          => 'ro',
-  isa         => 'Str',
-);
-
-test ini_format => sub {
-  my ($self) = @_;
-
-  my $writer = Config::MVP::Writer::INI->new($self->args);
-  my $string = $writer->ini_string($self->sections);
-
-  eq_or_diff $string, $self->expected_ini, 'ini string formatted as expected';
-};
+with 'IniTests';
 
 run_me(basic => {
   args => {
