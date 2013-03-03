@@ -208,6 +208,7 @@ For convenience a few specification shortcuts are recognized:
 
 =for :list
 * Documentation
-* A lot more tests
+* More tests
+* Allow payload to be an arrayref for explicit ordering
 
 =cut
