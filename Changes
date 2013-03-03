@@ -4,7 +4,7 @@ Revision history for Config-MVP-Writer-INI
 
   - Document 'spacing' attribute
   - Be more lenient in how sections are specified
-  - Fix formatting bugs producing too many newlines
+  - Bug fixes
   - More tests
 
 0.001     2013-03-02T23:00:07Z
