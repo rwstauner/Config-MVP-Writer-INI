@@ -45,6 +45,7 @@ run_me({
     }],
     [Pizza => 'Mod::Pizza' => ],
     [Donkey => 'Mod::Donuts' => ],
+    [SomethingElse => {with => 'a config'}],
     [AllTheSame => ],
     'EvenMore::TheSame' =>
     'Mod::NoArray' =>
@@ -60,6 +61,10 @@ orange   = beak
 
 [Pizza]
 [Donuts / Donkey]
+
+[SomethingElse]
+with = a config
+
 [AllTheSame]
 [EvenMore::TheSame]
 [NoArray / Mod::NoArray]

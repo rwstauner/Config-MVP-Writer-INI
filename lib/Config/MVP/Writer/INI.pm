@@ -64,11 +64,12 @@ sub ini_string {
 sub _ini_section {
   my ($self, $section) = @_;
 
-  $section = [ $section ]
-    unless ref($section) eq 'ARRAY';
+  # break the reference, make one if we don't have one
+  $section = ref($section) eq 'ARRAY' ? [@$section] : [$section];
 
-  my ($name, $package, $config) = @$section;
-  $package ||= $name;
+  my $config  = ref($section->[-1]) eq 'HASH' ? pop @$section : {};
+  my $name    = shift @$section;
+  my $package = shift @$section || $name;
 
   if( $self->can_rewrite_package ){
     $package = $self->rewrite_package($package);
