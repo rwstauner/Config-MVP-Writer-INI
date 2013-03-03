@@ -7,7 +7,6 @@ package # no_index
 use Test::More 0.96;
 use Test::Differences;
 use Test::Routine;
-use MooseX::AttributeShortcuts;
 
 use Config::MVP::Writer::INI ();
 
@@ -23,9 +22,10 @@ has sections => (
 );
 
 has ini_string => (
-  is          => 'lazy',
+  is          => 'ro',
   isa         => 'Str',
   init_arg    => undef,
+  lazy        => 1,
   default     => sub {
     my ($self) = @_;
     $self->writer->ini_string($self->sections);
@@ -33,8 +33,9 @@ has ini_string => (
 );
 
 has writer => (
-  is          => 'lazy',
+  is          => 'ro',
   isa         => 'Config::MVP::Writer::INI',
+  lazy        => 1,
   default     => sub {
     Config::MVP::Writer::INI->new($_[0]->args);
   },
@@ -43,7 +44,7 @@ has writer => (
 has expected_ini => (
   is          => 'ro',
   isa         => 'Str',
-  predicate   => 1,
+  predicate   => 'has_expected_ini',
 );
 
 test newlines => sub {
