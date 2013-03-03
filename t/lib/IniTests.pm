@@ -7,6 +7,7 @@ package # no_index
 use Test::More 0.96;
 use Test::Differences;
 use Test::Routine;
+use MooseX::AttributeShortcuts;
 
 use Config::MVP::Writer::INI ();
 
@@ -42,10 +43,22 @@ has writer => (
 has expected_ini => (
   is          => 'ro',
   isa         => 'Str',
+  predicate   => 1,
 );
+
+test newlines => sub {
+  my ($self) = @_;
+
+  like   $self->ini_string, qr/\A[^\n]/,   'no newline at beginning';
+  unlike $self->ini_string, qr/\n{3,}/,    'no more than two sequential newlines';
+  like   $self->ini_string, qr/[^\n]\n\z/, 'single newline at end';
+};
 
 test string_eq => sub {
   my ($self) = @_;
+
+  plan skip_all => 'expected_ini required'
+    unless $self->has_expected_ini;
 
   eq_or_diff
     $self->ini_string,
