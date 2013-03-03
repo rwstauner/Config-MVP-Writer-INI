@@ -74,7 +74,10 @@ sub _ini_section {
   my $package = shift @$section || $name;
 
   if( $self->can_rewrite_package ){
-    $package = $self->rewrite_package($package);
+    # copy the value and offer it as $_
+    local $_ = $package;
+    # only use if something was returned
+    $package = $self->rewrite_package($_) || $package;
   }
 
   # FIXME: this handles the bundle prefix but not the whole moniker (class suffix)

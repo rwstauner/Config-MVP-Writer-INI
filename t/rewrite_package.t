@@ -28,6 +28,12 @@ test_rewrite 'first arg $_[0]' => sub { $_[0] =~ /::/ ? $_[0] : "+$_[0]" }, <<IN
   [Miss::California / Miss]
 INI
 
+test_rewrite 'modification of $_' => sub { s/.+:://; $_ }, <<INI;
+  [Resolution / The]
+  [Caves / Orphans]
+  [California / Miss]
+INI
+
 test_rewrite 'naughty modification of $_[0]' => sub { $_[0] =~ s/^([A-Z])/$1_/; $_[0] }, <<INI;
   [R_esolution / The]
   [C_aves / Orphans]
