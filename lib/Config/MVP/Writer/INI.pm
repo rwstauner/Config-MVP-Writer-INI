@@ -161,6 +161,11 @@ my @sections;
 This class takes a collection of L<Config::MVP> style data structures
 and writes them to a string in INI format.
 
+One usage example would be to create a roughly equivalent INI file
+from the output of a plugin bundle (L<Dist::Zilla>, L<Pod::Weaver>, etc.).
+
+The author makes no claim that this would actually be useful to anyone.
+
 =head1 WARNING
 
 This code is very much in an alpha state and the API is likely to change.
@@ -176,6 +181,13 @@ each one being a C<Config::MVP> style section specification:
   ]
 
 and returns a string.
+
+For convenience a few specification shortcuts are recognized:
+
+  $name                => [ $name, $name, {} ]
+  [ $name ]            => [ $name, $name, {} ]
+  [ $name, $package ]  => [ $name, $package, {} ]
+  [ $name, \%payload ] => [ $name, $name, \%payload ]
 
 =for :stopwords TODO
 
