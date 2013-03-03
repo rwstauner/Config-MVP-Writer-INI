@@ -48,6 +48,7 @@ run_me({
     [AllTheSame => ],
     'EvenMore::TheSame' =>
     'Mod::NoArray' =>
+    [EndWithConfig => EWC => {foo => [qw( bar baz )]}],
   ],
   expected_ini => <<INI,
 [Package / Name]
@@ -62,6 +63,10 @@ orange   = beak
 [AllTheSame]
 [EvenMore::TheSame]
 [NoArray / Mod::NoArray]
+
+[EWC / EndWithConfig]
+foo = bar
+foo = baz
 INI
 });
 

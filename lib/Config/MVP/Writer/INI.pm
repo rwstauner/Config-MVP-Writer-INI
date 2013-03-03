@@ -56,7 +56,7 @@ sub ini_string {
   # don't need to start with a newline
   $ini =~ s/\A\n+//;
   # one newline at the end is sufficient
-  $ini =~ s/\n{2,}\z//;
+  $ini =~ s/\n*\z/\n/;
 
   return $ini;
 }
