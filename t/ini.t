@@ -32,7 +32,7 @@ test ini_format => sub {
   eq_or_diff $string, $self->expected_ini, 'ini string formatted as expected';
 };
 
-run_me({
+run_me(basic => {
   args => {
     rewrite_package => sub { $_[0] =~ /Mod::(.+)/ ? $1 : $_[0] },
   },
@@ -82,6 +82,11 @@ with = a config
 foo = bar
 foo = baz
 INI
+});
+
+run_me('no payloads; ends with single newline' => {
+  sections => [qw(Foo Bar)],
+  expected_ini => "[Foo]\n[Bar]\n",
 });
 
 done_testing;
