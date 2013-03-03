@@ -171,6 +171,19 @@ The author makes no claim that this would actually be useful to anyone.
 This code is very much in an alpha state and the API is likely to change.
 As always, suggestions, bug reports, patches, and pull requests are welcome.
 
+=attr spacing
+
+Defines the spacing between sections.
+Must be one of the following:
+
+=for :list
+= payload
+(Default) Put blank lines around sections with a payload
+= all
+Put a blank line between all sections
+= none
+No blank lines
+
 =method ini_string
 
 This takes an array ref of array refs,
