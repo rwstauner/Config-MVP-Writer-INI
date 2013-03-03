@@ -55,6 +55,8 @@ sub ini_string {
 
   # don't need to start with a newline
   $ini =~ s/\A\n+//;
+  # don't need more than two together (single blank line)
+  $ini =~ s/(?<=\n\n)\n+//g;
   # one newline at the end is sufficient
   $ini =~ s/\n*\z/\n/;
 

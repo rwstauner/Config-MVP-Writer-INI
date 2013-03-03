@@ -45,6 +45,8 @@ run_me({
     }],
     [Pizza => 'Mod::Pizza' => ],
     [Donkey => 'Mod::Donuts' => ],
+    [CokeBear => 'Mod::CokeBear' => {':version' => '1.002023'}],
+    [MASH => MASH => {':rum' => 'cookies', section => 8}],
     [SomethingElse => {with => 'a config'}],
     [AllTheSame => ],
     'EvenMore::TheSame' =>
@@ -61,6 +63,13 @@ orange   = beak
 
 [Pizza]
 [Donuts / Donkey]
+
+[CokeBear]
+:version = 1.002023
+
+[MASH]
+:rum    = cookies
+section = 8
 
 [SomethingElse]
 with = a config
