@@ -19,6 +19,7 @@ run_me(basic => {
     }],
     [Pizza => 'Mod::Pizza' => ],
     [Donkey => 'Mod::Donuts' => ],
+    ['@Multi/@Bundle/Donuts' => 'Mod::Donuts' => ],
     [CokeBear => 'Mod::CokeBear' => {':version' => '1.002023'}],
     [MASH => MASH => {':rum' => 'cookies', section => 8}],
     [SomethingElse => {with => 'a config'}],
@@ -37,6 +38,7 @@ orange   = beak
 
 [Pizza]
 [Donuts / Donkey]
+[Donuts]
 
 [CokeBear]
 :version = 1.002023

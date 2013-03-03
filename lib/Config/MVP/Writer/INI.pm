@@ -78,7 +78,8 @@ sub _ini_section {
   }
 
   # FIXME: this handles the bundle prefix but not the whole moniker (class suffix)
-  my $ini = "[$package" . ($name =~ /^(.+?\/)?$package$/ ? '' : " / $name") . "]\n";
+  # NOTE: I forgot what this ^^ means
+  my $ini = "[$package" . ($name =~ m{^([^/]+/)*$package$} ? '' : " / $name") . "]\n";
 
   $ini .= $self->_ini_section_config($config);
 
