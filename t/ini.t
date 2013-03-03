@@ -63,4 +63,9 @@ run_me('no payloads; ends with single newline' => {
   expected_ini => "[Foo]\n[Bar]\n",
 });
 
+run_me('one section with payload' => {
+  sections => [ [Dark => Blue => {rescued => 1}] ],
+  expected_ini => "[Blue / Dark]\nrescued = 1\n",
+});
+
 done_testing;
