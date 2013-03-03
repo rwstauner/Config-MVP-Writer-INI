@@ -11,8 +11,8 @@ use List::AllUtils ();
 
 has spacing => (
   is         => 'ro',
-  isa        => enum([qw( none all config )]),
-  default    => 'config',
+  isa        => enum([qw( none all payload )]),
+  default    => 'payload',
 );
 
 =for comment
@@ -46,8 +46,8 @@ sub ini_string {
     # put a blank line after each section
     @strings = map { "$_\n" } @strings;
   }
-  elsif( $spacing eq 'config' ){
-    # put a blank line around any section with a config
+  elsif( $spacing eq 'payload' ){
+    # put a blank line around any section with a payload
     @strings = map { /\n.+/ ? "\n$_\n" : $_ } @strings;
   }
 
@@ -177,7 +177,7 @@ This takes an array ref of array refs,
 each one being a C<Config::MVP> style section specification:
 
   [
-    [ $name, $package, \%config ],
+    [ $name, $package, \%payload ],
   ]
 
 and returns a string.

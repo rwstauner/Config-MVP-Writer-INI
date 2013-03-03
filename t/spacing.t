@@ -71,7 +71,7 @@ test_spacing all => <<INI;
   [Lullaby / A]
 INI
 
-test_spacing config => <<INI;
+test_spacing payload => <<INI;
   [Crashin]
   [Spinning]
 
