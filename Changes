@@ -2,6 +2,9 @@ Revision history for Config-MVP-Writer-INI
 
 {{$NEXT}}
 
+  - Be more lenient in how sections are specified
+  - Fix formatting bugs producing too many newlines
+
 0.001     2013-03-02T23:00:07Z
 
   - Initial release
