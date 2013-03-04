@@ -181,7 +181,7 @@ of each section.  The package will be passed as the only argument
 (and also available as C<$_>) and should return the translation.
 If nothing is returned the original package will be used.
 
-This can be used to flavor the ini for a particular application.
+This can be used to flavor the INI for a particular application.
 For example:
 
   rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
