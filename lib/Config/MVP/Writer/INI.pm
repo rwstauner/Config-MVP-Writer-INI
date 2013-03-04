@@ -174,6 +174,27 @@ The author makes no claim that this would actually be useful to anyone.
 This code is very much in an alpha state and the API is likely to change.
 As always, suggestions, bug reports, patches, and pull requests are welcome.
 
+=attr rewrite_package
+
+This attribute is a coderef that will be used to munge the package name
+of each section.  The package will be passed as the only argument
+(and also available as C<$_>) and should return the translation.
+If nothing is returned the original package will be used.
+
+This can be used to flavor the ini for a particular application.
+For example:
+
+  rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
+
+will transform an array ref of
+
+  [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
+
+into an INI string of
+
+  [-Nickname / Stinky]
+  real_name = Dexter
+
 =attr spacing
 
 Defines the spacing between sections.
