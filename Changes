@@ -2,6 +2,8 @@ Revision history for Config-MVP-Writer-INI
 
 {{$NEXT}}
 
+0.002     2013-03-04T00:45:53Z
+
   - Document and test the 'spacing' and 'rewrite_package' options
   - Be more lenient in how sections are specified
   - Bug fixes
