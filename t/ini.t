@@ -21,7 +21,7 @@ run_me(basic => {
     [Donkey => 'Mod::Donuts' => ],
     ['@Multi/@Bundle/Donuts' => 'Mod::Donuts' => ],
     [CokeBear => 'Mod::CokeBear' => {':version' => '1.002023'}],
-    [MASH => MASH => {':rum' => 'cookies', section => 8}],
+    [MASH => MASH => {':rum' => 'cookies', section => 8, discharge => undef, mess => ''}],
     [SomethingElse => {with => 'a config'}],
     [AllTheSame => ],
     'EvenMore::TheSame' =>
@@ -44,8 +44,10 @@ orange   = beak
 :version = 1.002023
 
 [MASH]
-:rum    = cookies
-section = 8
+:rum      = cookies
+discharge =
+mess      =
+section   = 8
 
 [SomethingElse]
 with = a config

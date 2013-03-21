@@ -53,6 +53,10 @@ test newlines => sub {
   like   $self->ini_string, qr/\A[^\n]/,   'no newline at beginning';
   unlike $self->ini_string, qr/\n{3,}/,    'no more than two sequential newlines';
   like   $self->ini_string, qr/[^\n]\n\z/, 'single newline at end';
+
+  # TODO: use \h for perl 5.10?
+  # of course this assumes none of our input values end in whitespace
+  unlike $self->ini_string, qr/[ \t]\n/,   'no trailing whitespace on any lines';
 };
 
 test string_eq => sub {
