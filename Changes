@@ -2,6 +2,8 @@ Revision history for Config-MVP-Writer-INI
 
 {{$NEXT}}
 
+  - Don't leave a trailing space on a line where a config value is blank
+
 0.002     2013-03-04T00:45:53Z
 
   - Document and test the 'spacing' and 'rewrite_package' options

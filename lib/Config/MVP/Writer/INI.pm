@@ -131,8 +131,10 @@ sub _ini_section_config {
 
     foreach my $k ( sort keys %$config ){
       my $v = $config->{ $k };
+      $v = '' if !defined $v;
       push @lines,
-        map { sprintf "%-*s = %s\n", $len, $k, $_ }
+        # don't end a line with "=\x20" (when the value is '')
+        map { sprintf "%-*s =%s\n", $len, $k, (length($_) ? ' ' . $_ : '') }
           # one k=v line per array item
           ref $v eq 'ARRAY'
             ? @$v
