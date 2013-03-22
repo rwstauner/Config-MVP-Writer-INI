@@ -3,6 +3,9 @@ Revision history for Config-MVP-Writer-INI
 {{$NEXT}}
 
   - Don't leave a trailing space on a line where a config value is blank
+  - Add 'strip_bundle_prefix' option to always remove the "@Foo/" part of
+    the section name (default true).  This cuts down on the noise when the
+    name is actually different from the package moniker.
 
 0.002     2013-03-04T00:45:53Z
 

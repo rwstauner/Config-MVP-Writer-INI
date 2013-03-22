@@ -15,6 +15,20 @@ has spacing => (
   default    => 'payload',
 );
 
+=attr strip_bundle_prefix
+
+Boolean: Always remove the leading C<@BundleName/> part of a section name.
+This cuts down on the noise when the name is actually different
+from the package moniker (but the prefix isn't desired).  Defaults to true.
+
+=cut
+
+has strip_bundle_prefix => (
+  is         => 'ro',
+  isa        => 'Bool',
+  default    => 1,
+);
+
 =for comment
 has simplify_bundles => (
   is         => 'ro',
@@ -89,6 +103,10 @@ sub _ini_section {
     # (ignoring possible bundle prefix and possible leading punctuation).
     if( $name =~ m{^([^/]+/)*\Q$moniker\E$} ){
       $name = ''
+    }
+    # else (if configured) just strip the whole prefix regardless
+    elsif( $self->strip_bundle_prefix ){
+      $name =~ s{^\@.+/}{};
     }
   }
 
