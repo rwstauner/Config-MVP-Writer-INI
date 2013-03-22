@@ -30,6 +30,7 @@ run_me(basic => {
     [AllTheSame => ],
     'EvenMore::TheSame' =>
     'Mod::NoArray' =>
+    '@Bundle',
     [EndWithConfig => EWC => {foo => [qw( bar baz )]}],
   ],
   expected_ini => <<INI,
@@ -59,6 +60,7 @@ with = a config
 [AllTheSame]
 [EvenMore::TheSame]
 [NoArray / Mod::NoArray]
+[\@Bundle]
 
 [EWC / EndWithConfig]
 foo = bar

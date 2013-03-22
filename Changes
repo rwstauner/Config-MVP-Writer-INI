@@ -3,6 +3,7 @@ Revision history for Config-MVP-Writer-INI
 {{$NEXT}}
 
   - Don't leave a trailing space on a line where a config value is blank
+  - Try harder to match the name to the package moniker to avoid duplicates.
   - Add 'strip_bundle_prefix' option to always remove the "@Foo/" part of
     the section name (default true).  This cuts down on the noise when the
     name is actually different from the package moniker.

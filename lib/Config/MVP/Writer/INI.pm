@@ -134,12 +134,12 @@ sub _ini_section {
 
   # this name matching junk could be better
   {
-    # ignore leading punctuation for this comparison
-    (my $moniker = $package) =~ s/^\W+//;
+    # make leading punctuation optional for this comparison
+    my ($prefix, $moniker) = ($package =~ m/^(\W*)(.+)$/);
 
     # Don't print the name if it's the same as the package moniker
     # (ignoring possible bundle prefix and possible leading punctuation).
-    if( $name =~ m{^([^/]+/)*\Q$moniker\E$} ){
+    if( $name =~ m{^([^/]+/)*(\Q$prefix\E)?\Q$moniker\E$} ){
       $name = ''
     }
     # else (if configured) just strip the whole prefix regardless
