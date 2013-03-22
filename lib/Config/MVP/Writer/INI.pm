@@ -9,6 +9,21 @@ use Moose;
 use Moose::Util::TypeConstraints;
 use List::AllUtils ();
 
+=attr spacing
+
+Defines the spacing between sections.
+Must be one of the following:
+
+=for :list
+= payload
+(Default) Put blank lines around sections with a payload
+= all
+Put a blank line between all sections
+= none
+No blank lines
+
+=cut
+
 has spacing => (
   is         => 'ro',
   isa        => enum([qw( none all payload )]),
@@ -34,6 +49,29 @@ has simplify_bundles => (
   is         => 'ro',
   isa        => union([qw( ArrayRef Bool )]),
 );
+=cut
+
+=attr rewrite_package
+
+This attribute is a coderef that will be used to munge the package name
+of each section.  The package will be passed as the only argument
+(and also available as C<$_>) and should return the translation.
+If nothing is returned the original package will be used.
+
+This can be used to flavor the INI for a particular application.
+For example:
+
+  rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
+
+will transform an array ref of
+
+  [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
+
+into an INI string of
+
+  [-Nickname / Stinky]
+  real_name = Dexter
+
 =cut
 
 has _rewrite_package => (
@@ -204,40 +242,6 @@ The author makes no claim that this would actually be useful to anyone.
 
 This code is very much in an alpha state and the API is likely to change.
 As always, suggestions, bug reports, patches, and pull requests are welcome.
-
-=attr rewrite_package
-
-This attribute is a coderef that will be used to munge the package name
-of each section.  The package will be passed as the only argument
-(and also available as C<$_>) and should return the translation.
-If nothing is returned the original package will be used.
-
-This can be used to flavor the INI for a particular application.
-For example:
-
-  rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
-
-will transform an array ref of
-
-  [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
-
-into an INI string of
-
-  [-Nickname / Stinky]
-  real_name = Dexter
-
-=attr spacing
-
-Defines the spacing between sections.
-Must be one of the following:
-
-=for :list
-= payload
-(Default) Put blank lines around sections with a payload
-= all
-Put a blank line between all sections
-= none
-No blank lines
 
 =method ini_string
 
