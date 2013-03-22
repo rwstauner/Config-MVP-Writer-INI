@@ -12,7 +12,7 @@ Config::MVP::Writer::INI - Build an INI file for Config::MVP
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -29,27 +29,6 @@ from the output of a plugin bundle (L<Dist::Zilla>, L<Pod::Weaver>, etc.).
 The author makes no claim that this would actually be useful to anyone.
 
 =head1 ATTRIBUTES
-
-=head2 rewrite_package
-
-This attribute is a coderef that will be used to munge the package name
-of each section.  The package will be passed as the only argument
-(and also available as C<$_>) and should return the translation.
-If nothing is returned the original package will be used.
-
-This can be used to flavor the INI for a particular application.
-For example:
-
-  rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
-
-will transform an array ref of
-
-  [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
-
-into an INI string of
-
-  [-Nickname / Stinky]
-  real_name = Dexter
 
 =head2 spacing
 
@@ -71,6 +50,33 @@ Put a blank line between all sections
 No blank lines
 
 =back
+
+=head2 strip_bundle_prefix
+
+Boolean: Always remove the leading C<@BundleName/> part of a section name.
+This cuts down on the noise when the name is actually different
+from the package moniker (but the prefix isn't desired).  Defaults to true.
+
+=head2 rewrite_package
+
+This attribute is a coderef that will be used to munge the package name
+of each section.  The package will be passed as the only argument
+(and also available as C<$_>) and should return the translation.
+If nothing is returned the original package will be used.
+
+This can be used to flavor the INI for a particular application.
+For example:
+
+  rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
+
+will transform an array ref of
+
+  [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
+
+into an INI string of
+
+  [-Nickname / Stinky]
+  real_name = Dexter
 
 =head1 METHODS
 
