@@ -80,9 +80,20 @@ sub _ini_section {
     $package = $self->rewrite_package($_) || $package;
   }
 
-  # FIXME: this handles the bundle prefix but not the whole moniker (class suffix)
-  # NOTE: I forgot what this ^^ means
-  my $ini = "[$package" . ($name =~ m{^([^/]+/)*\Q$package\E$} ? '' : " / $name") . "]\n";
+  # this name matching junk could be better
+  {
+    # ignore leading punctuation for this comparison
+    (my $moniker = $package) =~ s/^\W+//;
+
+    # Don't print the name if it's the same as the package moniker
+    # (ignoring possible bundle prefix and possible leading punctuation).
+    if( $name =~ m{^([^/]+/)*\Q$moniker\E$} ){
+      $name = ''
+    }
+  }
+
+  # Only show the name if different from the package moniker
+  my $ini = "[$package" . ($name ? " / $name" : '') . "]\n";
 
   $ini .= $self->_ini_section_config($config);
 
