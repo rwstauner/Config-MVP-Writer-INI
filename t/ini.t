@@ -8,7 +8,11 @@ with 'IniTests';
 
 run_me(basic => {
   args => {
-    rewrite_package => sub { $_[0] =~ /Mod::(.+)/ ? $1 : $_[0] },
+    rewrite_package => sub {
+      $_[0] =~ /Mod::(.+)/ ? $1 :
+      $_[0] =~ /ModX::(.+)/ ? "-$1" :
+      $_[0]
+    },
   },
   sections => [
     # name, package, payload
@@ -18,8 +22,8 @@ run_me(basic => {
       orange => ['feet', 'beak'],
     }],
     [Pizza => 'Mod::Pizza' => ],
-    [Donkey => 'Mod::Donuts' => ],
-    ['@Multi/@Bundle/Donuts' => 'Mod::Donuts' => ],
+    ['@Multi/@Bundle/Donkey' => 'Mod::Donuts' => ],
+    ['@Multi/@Bundle/Donuts' => 'ModX::Donuts' => ],
     [CokeBear => 'Mod::CokeBear' => {':version' => '1.002023'}],
     [MASH => MASH => {':rum' => 'cookies', section => 8, discharge => undef, mess => ''}],
     [SomethingElse => {with => 'a config'}],
@@ -38,7 +42,7 @@ orange   = beak
 
 [Pizza]
 [Donuts / Donkey]
-[Donuts]
+[-Donuts]
 
 [CokeBear]
 :version = 1.002023
