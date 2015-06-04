@@ -119,7 +119,7 @@ in addition to those websites please use your favorite search engine to discover
 ## Bugs / Feature Requests
 
 Please report any bugs or feature requests by email to `bug-config-mvp-writer-ini at rt.cpan.org`, or through
-the web interface at [http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Config-MVP-Writer-INI](http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Config-MVP-Writer-INI). You will be automatically notified of any
+the web interface at [https://rt.cpan.org/Public/Bug/Report.html?Queue=Config-MVP-Writer-INI](https://rt.cpan.org/Public/Bug/Report.html?Queue=Config-MVP-Writer-INI). You will be automatically notified of any
 progress on the request by the system.
 
 ## Source Code
@@ -131,6 +131,10 @@ progress on the request by the system.
 # AUTHOR
 
 Randy Stauner <rwstauner@cpan.org>
+
+# CONTRIBUTOR
+
+Karen Etheridge <ether@cpan.org>
 
 # COPYRIGHT AND LICENSE
 

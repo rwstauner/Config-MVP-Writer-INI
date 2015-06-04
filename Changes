@@ -2,6 +2,10 @@ Revision history for Config-MVP-Writer-INI
 
 {{$NEXT}}
 
+0.004     2015-06-04T23:25:30Z
+
+  - Remove unused dependency on List::AllUtils/List::MoreUtils. (@ether++)
+
 0.003     2013-03-22T04:30:04Z
 
   - Don't leave a trailing space on a line where a config value is blank
