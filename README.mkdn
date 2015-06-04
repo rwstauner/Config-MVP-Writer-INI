@@ -1,0 +1,140 @@
+# NAME
+
+Config::MVP::Writer::INI - Build an INI file for Config::MVP
+
+# VERSION
+
+version 0.004
+
+# SYNOPSIS
+
+    my $ini = Config::MVP::Writer::INI->new->ini_string(\@sections);
+
+# DESCRIPTION
+
+This class takes a collection of [Config::MVP](https://metacpan.org/pod/Config::MVP) style data structures
+and writes them to a string in INI format.
+
+One usage example would be to create a roughly equivalent INI file
+from the output of a plugin bundle ([Dist::Zilla](https://metacpan.org/pod/Dist::Zilla), [Pod::Weaver](https://metacpan.org/pod/Pod::Weaver), etc.).
+
+The author makes no claim that this would actually be useful to anyone.
+
+# ATTRIBUTES
+
+## spacing
+
+Defines the spacing between sections.
+Must be one of the following:
+
+- payload
+
+    (Default) Put blank lines around sections with a payload
+
+- all
+
+    Put a blank line between all sections
+
+- none
+
+    No blank lines
+
+## strip\_bundle\_prefix
+
+Boolean: Always remove the leading `@BundleName/` part of a section name.
+This cuts down on the noise when the name is actually different
+from the package moniker (but the prefix isn't desired).  Defaults to true.
+
+## rewrite\_package
+
+This attribute is a coderef that will be used to munge the package name
+of each section.  The package will be passed as the only argument
+(and also available as `$_`) and should return the translation.
+If nothing is returned the original package will be used.
+
+This can be used to flavor the INI for a particular application.
+For example:
+
+    rewrite_package => sub { s/^MyApp::Plugin::/-/r; }
+
+will transform an array ref of
+
+    [ Stinky => 'MyApp::Plugin::Nickname' => {real_name => "Dexter"} ]
+
+into an INI string of
+
+    [-Nickname / Stinky]
+    real_name = Dexter
+
+# METHODS
+
+## ini\_string
+
+This takes an array ref of array refs,
+each one being a `Config::MVP` style section specification:
+
+    [
+      [ $name, $package, \%payload ],
+    ]
+
+and returns a string.
+
+For convenience a few specification shortcuts are recognized:
+
+    $name                => [ $name, $name, {} ]
+    [ $name ]            => [ $name, $name, {} ]
+    [ $name, $package ]  => [ $name, $package, {} ]
+    [ $name, \%payload ] => [ $name, $name, \%payload ]
+
+# WARNING
+
+This code is very much in an alpha state and the API is likely to change.
+As always, suggestions, bug reports, patches, and pull requests are welcome.
+
+# TODO
+
+- Documentation
+- More tests
+- Allow payload to be an arrayref for explicit ordering
+
+# SUPPORT
+
+## Perldoc
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc Config::MVP::Writer::INI
+
+## Websites
+
+The following websites have more information about this module, and may be of help to you. As always,
+in addition to those websites please use your favorite search engine to discover more resources.
+
+- MetaCPAN
+
+    A modern, open-source CPAN search engine, useful to view POD in HTML format.
+
+    [http://metacpan.org/release/Config-MVP-Writer-INI](http://metacpan.org/release/Config-MVP-Writer-INI)
+
+## Bugs / Feature Requests
+
+Please report any bugs or feature requests by email to `bug-config-mvp-writer-ini at rt.cpan.org`, or through
+the web interface at [http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Config-MVP-Writer-INI](http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Config-MVP-Writer-INI). You will be automatically notified of any
+progress on the request by the system.
+
+## Source Code
+
+[https://github.com/rwstauner/Config-MVP-Writer-INI](https://github.com/rwstauner/Config-MVP-Writer-INI)
+
+    git clone https://github.com/rwstauner/Config-MVP-Writer-INI.git
+
+# AUTHOR
+
+Randy Stauner <rwstauner@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Randy Stauner.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
