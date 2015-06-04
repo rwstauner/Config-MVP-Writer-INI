@@ -7,7 +7,7 @@ package Config::MVP::Writer::INI;
 
 use Moose;
 use Moose::Util::TypeConstraints;
-use List::AllUtils ();
+use List::Util ();
 
 =attr spacing
 
@@ -194,7 +194,7 @@ sub _ini_section_config {
     unless $config && scalar keys %$config;
 
   my @lines;
-  my $len = List::AllUtils::max(map { length } keys %$config);
+  my $len = List::Util::max(map { length } keys %$config);
 
     foreach my $k ( sort keys %$config ){
       my $v = $config->{ $k };
