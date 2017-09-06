@@ -1,10 +1,14 @@
+[![Build Status](https://travis-ci.org/rwstauner/Config-MVP-Writer-INI.svg?branch=master)](https://travis-ci.org/rwstauner/Config-MVP-Writer-INI)
+[![Coverage Status](https://coveralls.io/repos/rwstauner/Config-MVP-Writer-INI/badge.svg?branch=master)](https://coveralls.io/r/rwstauner/Config-MVP-Writer-INI?branch=master)
+[![Kwalitee status](http://cpants.cpanauthors.org/dist/Config-MVP-Writer-INI.png)](http://cpants.charsbar.org/dist/overview/Config-MVP-Writer-INI)
+
 # NAME
 
 Config::MVP::Writer::INI - Build an INI file for Config::MVP
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
